@@ -1,0 +1,9 @@
+npm-debug.log*
+/.idea
+/.dart_tool
+/.vscode
+/node_modules
+/dist
+/obj/test
+/data/*.json
+/docker/id_rsa

@@ -1,0 +1,82 @@
+---
+# Container descriptor
+- descriptor: "pip-services:context-info:default:default:1.0"
+  name: "pip-services-email"
+  description: "Email delivery microservice for pip-services"
+
+# Console logger
+- descriptor: "pip-services:logger:console:default:1.0"
+  level: "trace"
+
+# Performance counters that posts values to log
+- descriptor: "pip-services:counters:log:default:1.0"
+  level: "trace"
+
+# Default controller
+# - descriptor: "pip-services-email:controller:default:default:1.0"
+#   connection:
+#     host: "{{{EMAIL_SERVICE_HOST}}}"
+#     ssl: "{{{EMAIL_SSL}}}"
+#     port: "{{{EMAIL_SERVICE_PORT}}}"
+#   credential:
+#     username: "{{{EMAIL_USER}}}"
+#     password: "{{{EMAIL_PASS}}}"
+#   message:
+#     from: "{{{EMAIL_FROM}}}"
+#   parameters:
+#     client_name: "{{{CLIENT_NAME}}}"
+#     client_url: "{{{CLIENT_URL}}}"
+#     server_url: "{{{SERVER_URL}}}"
+#     signature: "{{{EMAIL_SIGNATURE}}}"
+#   options:
+#     disabled: {{{EMAIL_DISABLED}}}
+
+# - descriptor: "pip-services-email:controller:default:default:1.0"
+#   connection:
+#     service: Gmail
+#     host: host233.hostmonster.com
+#     ssl: "true"
+#     port: "465"
+#   credential:
+#     username: "info@iquipsys.com"
+#     password: "iQuipsys#01"
+#   message:
+#     from: positron@iquipsys.com
+#   parameters:
+#     client_name: iQuipsys Positron
+#     client_url: http://www.positron.iquipsys.net
+#     server_url: api.positron.iquipsys.net
+#     signature: Yours iQuipsys support
+
+- descriptor: "pip-services-email:controller:default:default:1.0"
+  connection:
+    service: Gmail
+    host: smtp.gmail.com
+    ssl: "false"
+    port: "587"
+  credential:
+    username: "iris4tv"
+    password: "dahNoebrxVEh"
+  message:
+    from: iris4tv@gmail.com
+  parameters:
+    client_name: iQuipsys Positron
+    client_url: http://www.positron.iquipsys.net
+    server_url: api.positron.iquipsys.net
+    signature: Yours iQuipsys support
+
+# Common HTTP endpoint
+- descriptor: "pip-services:endpoint:http:default:1.0"
+  connection:
+    protocol: "http"
+    host: "0.0.0.0"
+    port: 8080
+
+# HTTP endpoint version 1.0
+- descriptor: "pip-services-email:service:http:default:1.0"
+
+# Heartbeat service
+- descriptor: "pip-services:heartbeat-service:http:default:1.0"
+
+# Status service
+- descriptor: "pip-services:status-service:http:default:1.0"

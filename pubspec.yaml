@@ -1,0 +1,25 @@
+name: pip_services_email
+version: 1.0.0
+author: Sergey Seroukhov
+description: Email Delivery Microservice
+homepage: https://github.com/
+
+environment:
+  sdk: ">=2.0.0 <3.0.0"
+
+dependencies:
+  pip_services3_commons: ">=1.0.5 <2.0.0"
+  pip_services3_components: ">=1.0.2 <2.0.0"
+  pip_services3_rpc: ">=1.0.2 <2.0.0"
+  pip_services3_container: ">=1.0.0 <2.0.0"
+  # pip-services3-aws-dart: ">=1.0.0 <2.0.0"
+  http: "^0.12.0"
+
+  mustache4dart2: ^0.1.0
+  mailer: ^3.0.4
+  logging: ^0.11.4
+
+  angel_framework: ^2.1.1
+
+dev_dependencies:
+  test: '>=1.14.2 <2.0.0'
