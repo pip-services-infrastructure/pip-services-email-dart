@@ -13,23 +13,23 @@
   level: "trace"
 
 # Default controller
-# - descriptor: "pip-services-email:controller:default:default:1.0"
-#   connection:
-#     host: "{{{EMAIL_SERVICE_HOST}}}"
-#     ssl: "{{{EMAIL_SSL}}}"
-#     port: "{{{EMAIL_SERVICE_PORT}}}"
-#   credential:
-#     username: "{{{EMAIL_USER}}}"
-#     password: "{{{EMAIL_PASS}}}"
-#   message:
-#     from: "{{{EMAIL_FROM}}}"
-#   parameters:
-#     client_name: "{{{CLIENT_NAME}}}"
-#     client_url: "{{{CLIENT_URL}}}"
-#     server_url: "{{{SERVER_URL}}}"
-#     signature: "{{{EMAIL_SIGNATURE}}}"
-#   options:
-#     disabled: {{{EMAIL_DISABLED}}}
+- descriptor: "pip-services-email:controller:default:default:1.0"
+  connection:
+    host: "{{{EMAIL_SERVICE_HOST}}}"
+    ssl: "{{{EMAIL_SSL}}}"
+    port: "{{{EMAIL_SERVICE_PORT}}}"
+  credential:
+    username: "{{{EMAIL_USER}}}"
+    password: "{{{EMAIL_PASS}}}"
+  message:
+    from: "{{{EMAIL_FROM}}}"
+  parameters:
+    client_name: "{{{CLIENT_NAME}}}"
+    client_url: "{{{CLIENT_URL}}}"
+    server_url: "{{{SERVER_URL}}}"
+    signature: "{{{EMAIL_SIGNATURE}}}"
+  options:
+    disabled: {{{EMAIL_DISABLED}}}
 
 # - descriptor: "pip-services-email:controller:default:default:1.0"
 #   connection:
@@ -47,23 +47,6 @@
 #     client_url: http://www.positron.iquipsys.net
 #     server_url: api.positron.iquipsys.net
 #     signature: Yours iQuipsys support
-
-- descriptor: "pip-services-email:controller:default:default:1.0"
-  connection:
-    service: Gmail
-    host: smtp.gmail.com
-    ssl: "false"
-    port: "587"
-  credential:
-    username: "iris4tv"
-    password: "dahNoebrxVEh"
-  message:
-    from: iris4tv@gmail.com
-  parameters:
-    client_name: iQuipsys Positron
-    client_url: http://www.positron.iquipsys.net
-    server_url: api.positron.iquipsys.net
-    signature: Yours iQuipsys support
 
 # Common HTTP endpoint
 - descriptor: "pip-services:endpoint:http:default:1.0"

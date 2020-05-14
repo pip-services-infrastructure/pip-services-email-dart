@@ -26,18 +26,7 @@ group('EmailHttpServiceV1', () {
         var controller = new EmailController();
 
         controller.configure(ConfigParams.fromTuples([
-            'connection.service', 'Gmail',
-            'connection.host', 'smtp.gmail.com',
-            'connection.ssl', false,
-            'connection.port', 587,
-            'credential.username', 'iris4tv',
-            'credential.password', 'dahNoebrxVEh',
-            'message.from', 'iris4tv@gmail.com',
-            'parameters.client_name', 'iQuipsys Positron',
-            'parameters.client_url', 'http://www.positron.iquipsys.net',
-            'parameters.server_url', 'api.positron.iquipsys.net',
-            'parameters.signature', 'Yours iQuipsys support',
-            'options.disabled', false
+            'options.disabled', true
         ]));
 
         service = new EmailHttpServiceV1();
@@ -63,7 +52,7 @@ group('EmailHttpServiceV1', () {
             headers: {'Content-Type': 'application/json'},
             body : json.encode({
                 'message': EmailMessageV1()..fromJson({
-                    'to': 'deniskuzn@gmail.com', //pipdevs@gmail.com
+                    'to': 'pipdevs@gmail.com',
                     'subject': 'Test message',
                     'text': 'This is a test message'
                 })}));
