@@ -3,9 +3,7 @@ import 'package:pip_services3_rpc/pip_services3_rpc.dart';
 
 class EmailHttpServiceV1 extends CommandableHttpService {
   EmailHttpServiceV1() : super('v1/email') {
-    this.dependencyResolver.put(
-        "controller",
-        new Descriptor(
-            "pip-services-email", "controller", "default", "*", "1.0"));
+    dependencyResolver.put('controller',
+        Descriptor('pip-services-email', 'controller', 'default', '*', '1.0'));
   }
 }

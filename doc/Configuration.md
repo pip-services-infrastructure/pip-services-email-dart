@@ -1,4 +1,8 @@
-# Configuration Guide <br/> Email Delivery Microservice
+# Configuration Guide <br> Email Delivery Microservice
+
+Configuration structure used by this module follows the 
+[standard configuration] https://github.com/pip-services/pip-services/blob/master/usage/Configuration.md 
+structure.
 
 Email delivery microservice configuration structure follows the 
 [standard configuration](https://github.com/pip-services/pip-services3-container-node/doc/Configuration.md) 
@@ -61,25 +65,3 @@ Example:
     host: "0.0.0.0"
     port: 3000
 ```
-
-### <a name="service_seneca"></a> Seneca
-
-Seneca service has the following configuration properties:
-- connection: object - Seneca transport configuration options. See http://senecajs.org/api/ for details.
-  - type: string - Seneca transport type 
-  - host: string - IP address/hostname binding (default is '0.0.0.0')
-  - port: number - Seneca port number
-
-A detail description of Seneca protocol version 1 can be found [here](SenecaProtocolV1.md)
-
-Example:
-```yaml
-- descriptor: "pip-services-email:service:seneca:default:1.0"
-  connection:
-    protocol: "http"
-    host: "0.0.0.0"
-    port: 3000
-```
-
-For more information on this section read 
-[Pip.Services Configuration Guide](https://github.com/pip-services/pip-services3-container-node/doc/Configuration.md#deps)

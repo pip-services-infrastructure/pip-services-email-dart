@@ -5,15 +5,9 @@ $buildImage="$($component.registry)/$($component.name):$($component.version)-bui
 $testImage="$($component.registry)/$($component.name):$($component.version)-test"
 
 # Clean up build directories
-if (Test-Path "obj") {
-    Remove-Item -Recurse -Force -Path "obj"
-}
 if (Test-Path "dist") {
     Remove-Item -Recurse -Force -Path "dist"
 }
-
-Get-ChildItem -Path "." -Include "obj" -Recurse | foreach($_) { Remove-Item -Force -Recurse $_.FullName }
-
 
 # Remove docker images
 docker rmi $buildImage --force

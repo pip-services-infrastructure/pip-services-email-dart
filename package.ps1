@@ -13,12 +13,6 @@ docker build -f docker/Dockerfile -t $image -t $latestImage .
 # Set environment variables
 $env:IMAGE = $image
 
-# Set docker host address
-$dockerMachineHost = $env:DOCKER_MACHINE_HOST
-if ($dockerMachineHost -eq $null) {
-    $dockerMachineHost = "localhost"
-}
-
 try {
     # Workaround to remove dangling images
     docker-compose -f ./docker/docker-compose.yml down
@@ -26,8 +20,7 @@ try {
     docker-compose -f ./docker/docker-compose.yml up -d
 
     Start-Sleep -Seconds 10
-    Invoke-WebRequest -Uri http://$($dockerMachineHost):8080/heartbeat
-    Invoke-WebRequest -Uri http://$($dockerMachineHost):8080/v1/eventlog/get_events -Method Post
+    Invoke-WebRequest -Uri http://localhost:8080/heartbeat
 
     Write-Host "The container was successfully built."
     

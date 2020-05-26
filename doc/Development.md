@@ -1,117 +1,50 @@
-# Development and Testing Guide <br/> Email Delivery Microservice
+# Development and Testing Guide <br> Email Delivery Microservice
 
 This document provides high-level instructions on how to build and test the microservice.
 
 * [Environment Setup](#setup)
 * [Installing](#install)
-* [Building](#build)
 * [Testing](#test)
-* [Contributing](#contrib) 
 
 ## <a name="setup"></a> Environment Setup
 
-This is a Node.js project and you have to install Node.js tools. 
-You can download them from official Node.js website: https://nodejs.org/en/download/ 
+This is a Dart project, so you'll have to install Dart to work with it. 
+You can download it from the official website: https://dart.dev/get-dart
 
-After node is installed you can check it by running the following command:
+You can check that Node.js has been successfully installed by running the following command:
 ```bash
-node -version
+dart --version
 ```
 
-Then you need to configure node tools:
-```bash
-# Install typescript compiler
-npm install typescript -g
- 
+To work with the GitHub code repository you need to install Git from: https://git-scm.com/downloads
 
-# Install mocha test runner
-npm install mocha -g
-```
-
-To work with GitHub code repository you need to install Git from: https://git-scm.com/downloads
-
-If you are planning to develop and test using persistent storages other than flat files
-you may need to install database servers:
-- Download and install MongoDB database from https://www.mongodb.org/downloads
+If you plan on developing and testing with persistent storages other than in-memory/flat file persistences,
+you may need to install a database server:
+- Download and install MongoDB from: https://www.mongodb.org/downloads
 
 ## <a name="install"></a> Installing
 
-After your environment is ready you can check out microservice source code from the Github repository:
+Once your environment is ready, you can check out the microservice's source code from the GitHub repository:
 ```bash
-git clone git@github.com:pip-services-users/pip-services-email-node.git
+git clone https://github.com/pip-services-infrastructure/pip-services-email-dart.git
 ```
 
 Then go to the project folder and install dependent modules:
 
 ```bash
 # Install dependencies
-npm install
+pub get
 ```
 
-If you worked with the microservice before you can check out latest changes and update the dependencies:
+If you've worked with the microservice before, you can check out the latest changes and update the dependencies:
 ```bash
-# Update source code updates from github
+# Update source code updates from GitHub
 git pull
-
-# Update dependencies
-npm update
-```
-
-## <a name="build"></a> Building
-
-This microservice is written in TypeScript language which is transcompiled into JavaScript.
-So, if you make changes to the source code you need to compile it before running or committing to github.
-The process will output compiled javascript files into /bin folder.
-
-```bash
-tsc
-```
-
-When you do continuous edit-build-test cycle, you can run typescript compiler with --watch option
-to detect and compile changes you make automatically:
-
-```bash
-tsc --watch
 ```
 
 ## <a name="test"></a> Testing
 
-Before you execute tests you need to set configuration options in config.yml file.
-As a starting point you can use example from config.example.yml:
-
+The command to run unit tests is as follows:
 ```bash
-copy config.example.yml config.yml
-``` 
-
-After that check all configuration options. Specifically, pay attention to connection options
-for database and dependent microservices. For more information check [Configuration Guide](Configuration.md) 
-
-Command to run unit tests:
-```bash
-npm test
+pub run test ./test
 ```
-
-You can also execute benchmarks as:
-```bash
-npm run benchmark
-```
-
-## <a name="contrib"></a> Contributing
-
-Developers interested in contributing should read the following instructions:
-
-- [How to Contribute](http://www.pipservices.org/contribute/)
-- [Guidelines](http://www.pipservices.org/contribute/guidelines)
-- [Styleguide](http://www.pipservices.org/contribute/styleguide)
-- [ChangeLog](CHANGELOG.md)
-
-> Please do **not** ask general questions in an issue. Issues are only to report bugs, request
-  enhancements, or request new features. For general questions and discussions, use the
-  [Contributors Forum](http://www.pipservices.org/forums/forum/contributors/).
-
-It is important to note that for each release, the [ChangeLog](CHANGELOG.md) is a resource that will
-itemize all:
-
-- Bug Fixes
-- New Features
-- Breaking Changes

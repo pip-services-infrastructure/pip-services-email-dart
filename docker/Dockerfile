@@ -11,21 +11,14 @@ COPY . .
 RUN pub get
 RUN pub get --offline
 
-# set default environment variables
-ENV EMAIL_SERVICE ""
-ENV EMAIL_SERVICE_HOST ""
-ENV EMAIL_SERVICE_PORT ""
-ENV EMAIL_SSL "true"
-ENV EMAIL_DABLED "false"
-ENV EMAIL_USER ""
-ENV EMAIL_PASS ""
-ENV EMAIL_FROM ""
-ENV CLIENT_NAME ""
-ENV CLIENT_URL ""
-ENV SERVER_URL ""
-ENV EMAIL_SIGNATURE ""
+# Set the required environment variables
+ENV HTTP_PORT=8080
+ENV MONGO_SERVICE_HOST=
+ENV MONGO_SERVICE_PORT=27017
+ENV MONGO_SERVICE_URI=
 
-EXPOSE 8080
+# Expose the HTTP port
+EXPOSE "8080:8080"
 
 # Specify the command for running the service
 CMD []

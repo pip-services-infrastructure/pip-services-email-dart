@@ -1,8 +1,7 @@
 name: pip_services_email
-version: 1.0.0
-author: Sergey Seroukhov
-description: Email Delivery Microservice
-homepage: https://github.com/
+version: "1.0.0"
+description: Email Delivery microservice for Pip.Services in Dart. This microservice sends emails to specified recipients.
+homepage: https://github.com/pip-services-infrastructure/pip-services-email-dart
 
 environment:
   sdk: ">=2.0.0 <3.0.0"
@@ -10,9 +9,11 @@ environment:
 dependencies:
   pip_services3_commons: ">=1.0.5 <2.0.0"
   pip_services3_components: ">=1.0.2 <2.0.0"
+  pip_services3_data: ">=1.0.0 <2.0.0"
+  pip_services3_mongodb: ">=1.0.2 <2.0.0"
   pip_services3_rpc: ">=1.0.2 <2.0.0"
+  pip_services3_grpc: ">=1.0.0 <2.0.0"
   pip_services3_container: ">=1.0.0 <2.0.0"
-  # pip-services3-aws-dart: ">=1.0.0 <2.0.0"
   http: "^0.12.0"
 
   mustache4dart2: ^0.1.0

@@ -7,56 +7,63 @@ class EmailCommandSet extends CommandSet {
   IEmailController _logic;
 
   EmailCommandSet(IEmailController logic) : super() {
-    this._logic = logic;
+    _logic = logic;
 
-    this.addCommand(this.makeSendMessageCommand());
-    this.addCommand(this.makeSendMessageToRecipientCommand());
-    this.addCommand(this.makeSendMessageToRecipientsCommand());
+    addCommand(_makeSendMessageCommand());
+    addCommand(_makeSendMessageToRecipientCommand());
+    addCommand(_makeSendMessageToRecipientsCommand());
   }
 
-  ICommand makeSendMessageCommand() {
+  ICommand _makeSendMessageCommand() {
     return Command(
-        "send_message",
-        new ObjectSchema(true)
+        'send_message',
+        ObjectSchema(true)
             .withRequiredProperty('message', EmailMessageV1Schema())
             .withOptionalProperty('parameters', TypeCode.Map),
         (String correlationId, Parameters args) {
-      var message = EmailMessageV1()..fromJson(args.get("message"));
-      var parameters = ConfigParams()..fromJson(args.get("parameters"));
-      this._logic.sendMessage(correlationId, message, parameters);
+      var message = EmailMessageV1();
+      message.fromJson(args.get('message'));
+      var parameters = ConfigParams.fromValue(args.get('parameters'));
+      _logic.sendMessage(correlationId, message, parameters);
     });
   }
 
-  ICommand makeSendMessageToRecipientCommand() {
+  ICommand _makeSendMessageToRecipientCommand() {
     return Command(
-        "send_message_to_recipient",
-        new ObjectSchema(true)
-            .withRequiredProperty('message', new EmailMessageV1Schema())
-            .withRequiredProperty('recipient', new EmailRecipientV1Schema())
+        'send_message_to_recipient',
+        ObjectSchema(true)
+            .withRequiredProperty('message', EmailMessageV1Schema())
+            .withRequiredProperty('recipient', EmailRecipientV1Schema())
             .withOptionalProperty('parameters', TypeCode.Map),
         (String correlationId, Parameters args) {
-      var message = EmailMessageV1()..fromJson(args.get("message"));
-      var recipient = EmailRecipientV1()..fromJson(args.get("recipient"));
-      var parameters = ConfigParams()..fromJson(args.get("parameters"));
+      var message = EmailMessageV1();
+      message.fromJson(args.get('message'));
+      var recipient = EmailRecipientV1();
+      recipient.fromJson(args.get('recipient'));
+      var parameters = ConfigParams.fromValue(args.get('parameters'));
 
-      this._logic.sendMessageToRecipient(
+      _logic.sendMessageToRecipient(
           correlationId, recipient, message, parameters);
     });
   }
 
-  ICommand makeSendMessageToRecipientsCommand() {
+  ICommand _makeSendMessageToRecipientsCommand() {
     return Command(
-        "send_message_to_recipients",
-        new ObjectSchema(true)
-            .withRequiredProperty('message', new EmailMessageV1Schema())
+        'send_message_to_recipients',
+        ObjectSchema(true)
+            .withRequiredProperty('message', EmailMessageV1Schema())
             .withRequiredProperty(
-                'recipients', new ArraySchema(new EmailRecipientV1Schema()))
+                'recipients', ArraySchema(EmailRecipientV1Schema()))
             .withOptionalProperty('parameters', TypeCode.Map),
         (String correlationId, Parameters args) {
-      var message = args.get("message");
-      var recipients = args.get("recipients");
-      var parameters = args.get("parameters");
-      this._logic.sendMessageToRecipients(
+      var message = EmailMessageV1();
+      message.fromJson(args.get('message'));
+      //var recipients = args.get("recipients");
+      var recipients = List<EmailRecipientV1>.from(args
+          .get('recipients')
+          .map((itemsJson) => EmailRecipientV1.fromJson(itemsJson)));
+      var parameters = ConfigParams.fromValue(args.get('parameters'));
+      _logic.sendMessageToRecipients(
           correlationId, recipients, message, parameters);
     });
   }

@@ -31,23 +31,6 @@
   options:
     disabled: {{{EMAIL_DISABLED}}}
 
-# - descriptor: "pip-services-email:controller:default:default:1.0"
-#   connection:
-#     service: Gmail
-#     host: host233.hostmonster.com
-#     ssl: "true"
-#     port: "465"
-#   credential:
-#     username: "info@iquipsys.com"
-#     password: "iQuipsys#01"
-#   message:
-#     from: positron@iquipsys.com
-#   parameters:
-#     client_name: iQuipsys Positron
-#     client_url: http://www.positron.iquipsys.net
-#     server_url: api.positron.iquipsys.net
-#     signature: Yours iQuipsys support
-
 # Common HTTP endpoint
 - descriptor: "pip-services:endpoint:http:default:1.0"
   connection:

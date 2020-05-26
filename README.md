@@ -33,33 +33,21 @@ class EmailMessageV1 {
   dynamic subject;
   dynamic text;
   dynamic html;
-
-  EmailMessageV1();
-
-  EmailMessageV1.from(this.from, this.cc, this.bcc, this.to, this.reply_to, this.subject, this.text, this.html);
-
-  void fromJson(Map<String, dynamic> json);
-  Map<String, dynamic> toJson();
 }
-    
+
 class EmailRecipientV1 {
   String id;
   String name;
   String email;
   String language;
-
-  EmailRecipientV1();
-
-  EmailRecipientV1.from(this.id, this.name, this.email, this.language);
-
-  void fromJson(Map<String, dynamic> json);
-  Map<String, dynamic> toJson();
 }
 
-interface IEmailV1 {
-  Future<void> sendMessage(String correlationId, EmailMessageV1 message, ConfigParams parameters);
-  Future<void> sendMessageToRecipient(String correlationId, EmailRecipientV1 recipient, EmailMessageV1 message, ConfigParams parameters);
-  Future<void> sendMessageToRecipients(String correlationId, List<EmailRecipientV1> recipients, EmailMessageV1 message, ConfigParams parameters);
+abstract class IEmailV1 {
+  Future sendMessage(String correlationId, EmailMessageV1 message, ConfigParams parameters);
+
+  Future sendMessageToRecipient(String correlationId, EmailRecipientV1 recipient, EmailMessageV1 message, ConfigParams parameters);
+
+  Future sendMessageToRecipients(String correlationId, List<EmailRecipientV1> recipients, EmailMessageV1 message, ConfigParams parameters);
 }
 ```
 
@@ -134,10 +122,14 @@ If you use dart, then get references to the required libraries:
 - Pip.Services3.Commons : https://github.com/pip-services3-dart/pip-services3-commons-dart
 - Pip.Services3.Rpc: https://github.com/pip-services3-dart/pip-services3-rpc-dart
 
-Add **pip-services3-commons-dart** and **pip_clients_email** packages
+
+Add **pip-services3-commons-dart**, **pip-services3-rpc-dart** and **pip-services_email** packages
 ```dart
 import 'package:pip_services3_commons/pip_services3_commons.dart';
-import 'package:pip_clients_email/pip_clients_email.dart';
+import 'package:pip_services3_rpc/pip_services3_rpc.dart';
+
+import 'package:pip_services_email/pip_services_email.dart';
+
 ```
 
 Define client configuration parameters that match configuration of the microservice external API
@@ -166,37 +158,39 @@ await client.open(null);
 Now the client is ready to perform operations
 ```dart
 // Send email message to address
+var message = EmailMessageV1(to: 'somebody@somewhere.com', 
+                             subject: 'Test', 
+                             text: 'This is a test message. Please, ignore it');
+var parameters = ConfigParams.fromTuples(
+                             ['subject', 'Test Email To Address', 'text', 'This is just a test']);
+
 await client.sendMessage(
     null,
-    EmailMessageV1()..fromJson({ 
-        'to': 'somebody@somewhere.com',
-        'subject': 'Test',
-        'text': 'This is a test message. Please, ignore it'
-    }),
-    ConfigParams.fromTuples([
-        'subject', 'Test Email To Address',
-        'text', 'This is just a test'
-    ])
+    message,
+    parameters
 );
 ```
 
 ```dart
 // Send email message to users
+var recipient1 = EmailRecipientV1(id: '1', email: 'user1@somewhere.com');
+var recipient2 = EmailRecipientV1(id: '2', email: 'user2@somewhere.com');
+var message = EmailMessageV1(subject: 'Test', 
+                             text: 'This is a test message. Please, ignore it');
 await client.sendMessageToRecipients(
     null,
     [
-        EmailRecipientV1()..fromJson({ id: '123', email: 'user1@somewhere.com' }),
-        EmailRecipientV1()..fromJson({ id: '321', email: 'user2@somewhere.com' })
+        recipient1,
+        recipient2
     ],
-    EmailMessageV1()..fromJson({ 
-        'subject': 'Test',
-        'text': 'This is a test message. Please, ignore it'
-    }),
+    message,
     null
 );
 ```
 
 ## Acknowledgements
 
-This microservice was created and currently maintained by *Sergey Seroukhov*.
-
+This microservice was created and currently maintained by
+- **Sergey Seroukhov**
+- **Denis Kuznetsov**
+- **Nuzhnykh Egor**.
