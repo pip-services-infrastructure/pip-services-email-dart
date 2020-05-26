@@ -1,4 +1,4 @@
-# Email Delivery Microservice
+# <img src="https://github.com/pip-services/pip-services/raw/master/design/Logo.png" alt="Pip.Services Logo" style="max-width:30%"> <br> Email Delivery Microservice
 
 This is a email delivery microservice from Pip.Services library. 
 This microservice sends emails to specified recipients.
