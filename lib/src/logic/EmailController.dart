@@ -30,7 +30,7 @@ class EmailController
     null
   ]);
 
-  ConfigParams config;
+  ConfigParams _config;
 
   String _messageFrom;
   String _messageCc;
@@ -59,7 +59,7 @@ class EmailController
           null, '${record.level.name}: ${record.time}: ${record.message}');
     });
 
-    config = config.setDefaults(EmailController._defaultConfig);
+    _config = config.setDefaults(EmailController._defaultConfig);
 
     _messageFrom = config.getAsStringWithDefault('message.from', _messageFrom);
     _messageCc = config.getAsStringWithDefault('message.cc', _messageCc);
